@@ -1,0 +1,477 @@
+Please enter a MongoDB connection string (Default: mongodb://localhost/): mondodb
+mondodb
+Current Mongosh Log ID: 6981c251ced59461ef628c9f
+Connecting to:          mongodb://127.0.0.1:27017/mondodb?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.6.0
+Using MongoDB:          8.0.11
+Using Mongosh:          2.6.0
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+------
+   The server generated these startup warnings when booting
+   2026-01-30T08:42:21.237+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+mondodb> use environment
+switched to db environment
+environment> db.Location.insertMany([
+...   { locationid: 1, city: "Bangalore", state: "Karnataka", country: "India", elevation: 920 },
+...   { locationid: 2, city: "Mumbai", state: "Maharashtra", country: "India", elevation: 14 },
+...   { locationid: 3, city: "Delhi", state: "Delhi", country: "India", elevation: 216 }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6981c279ced59461ef628ca0'),
+    '1': ObjectId('6981c279ced59461ef628ca1'),
+    '2': ObjectId('6981c279ced59461ef628ca2')
+  }
+}
+environment> db.Time.insertMany([
+...   { timeid: 1, date: ISODate("2026-01-10"), year: 2026, season: "Winter" },
+...   { timeid: 2, date: ISODate("2026-03-15"), year: 2026, season: "Summer" },
+...   { timeid: 3, date: ISODate("2026-07-20"), year: 2026, season: "Monsoon" }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6981c280ced59461ef628ca3'),
+    '1': ObjectId('6981c280ced59461ef628ca4'),
+    '2': ObjectId('6981c280ced59461ef628ca5')
+  }
+}
+environment> db.Weather.insertMany([
+...   { weatherid: 101, temperature: 24.5, humidity: 60, locationid: 1, timeid: 1 },
+...   { weatherid: 102, temperature: 32.0, humidity: 70, locationid: 2, timeid: 2 },
+...   { weatherid: 103, temperature: 26.8, humidity: 85, locationid: 3, timeid: 3 }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6981c285ced59461ef628ca6'),
+    '1': ObjectId('6981c285ced59461ef628ca7'),
+    '2': ObjectId('6981c285ced59461ef628ca8')
+  }
+}
+environment> db.AirQuality.insertMany([
+...   { airid: 401, aqi: 75, locationid: 1, timeid: 1 },
+...   { airid: 402, aqi: 120, locationid: 2, timeid: 2 },
+...   { airid: 403, aqi: 95, locationid: 3, timeid: 3 }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6981c28aced59461ef628ca9'),
+    '1': ObjectId('6981c28aced59461ef628caa'),
+    '2': ObjectId('6981c28aced59461ef628cab')
+  }
+}
+environment> db.Precipitation.insertMany([
+...   { precipid: 301, rainfall: 0, cloud: 20, weatherid: 101 },
+...   { precipid: 302, rainfall: 0, cloud: 35, weatherid: 102 },
+...   { precipid: 303, rainfall: 12.5, cloud: 80, weatherid: 103 }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6981c28fced59461ef628cac'),
+    '1': ObjectId('6981c28fced59461ef628cad'),
+    '2': ObjectId('6981c28fced59461ef628cae')
+  }
+}
+environment> db.Weather.aggregate([
+...   { $lookup: { from: "Location", localField: "locationid", foreignField: "locationid", as: "loc" } },
+...   { $unwind: "$loc" },
+...   { $project: { city: "$loc.city", temperature: 1, humidity: 1 } }
+... ])
+[
+  {
+    _id: ObjectId('6981c285ced59461ef628ca6'),
+    temperature: 24.5,
+    humidity: 60,
+    city: 'Bangalore'
+  },
+  {
+    _id: ObjectId('6981c285ced59461ef628ca7'),
+    temperature: 32,
+    humidity: 70,
+    city: 'Mumbai'
+  },
+  {
+    _id: ObjectId('6981c285ced59461ef628ca8'),
+    temperature: 26.8,
+    humidity: 85,
+    city: 'Delhi'
+  }
+]
+environment> db.Location.aggregate([
+...   { $lookup: { from: "Weather", localField: "locationid", foreignField: "locationid", as: "weather" } }
+... ])
+[
+  {
+    _id: ObjectId('6981c279ced59461ef628ca0'),
+    locationid: 1,
+    city: 'Bangalore',
+    state: 'Karnataka',
+    country: 'India',
+    elevation: 920,
+    weather: [
+      {
+        _id: ObjectId('6981c285ced59461ef628ca6'),
+        weatherid: 101,
+        temperature: 24.5,
+        humidity: 60,
+        locationid: 1,
+        timeid: 1
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c279ced59461ef628ca1'),
+    locationid: 2,
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    country: 'India',
+    elevation: 14,
+    weather: [
+      {
+        _id: ObjectId('6981c285ced59461ef628ca7'),
+        weatherid: 102,
+        temperature: 32,
+        humidity: 70,
+        locationid: 2,
+        timeid: 2
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c279ced59461ef628ca2'),
+    locationid: 3,
+    city: 'Delhi',
+    state: 'Delhi',
+    country: 'India',
+    elevation: 216,
+    weather: [
+      {
+        _id: ObjectId('6981c285ced59461ef628ca8'),
+        weatherid: 103,
+        temperature: 26.8,
+        humidity: 85,
+        locationid: 3,
+        timeid: 3
+      }
+    ]
+  }
+]
+environment> db.Weather.aggregate([
+...   { $lookup: { from: "Location", localField: "locationid", foreignField: "locationid", as: "location" } }
+... ])
+[
+  {
+    _id: ObjectId('6981c285ced59461ef628ca6'),
+    weatherid: 101,
+    temperature: 24.5,
+    humidity: 60,
+    locationid: 1,
+    timeid: 1,
+    location: [
+      {
+        _id: ObjectId('6981c279ced59461ef628ca0'),
+        locationid: 1,
+        city: 'Bangalore',
+        state: 'Karnataka',
+        country: 'India',
+        elevation: 920
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c285ced59461ef628ca7'),
+    weatherid: 102,
+    temperature: 32,
+    humidity: 70,
+    locationid: 2,
+    timeid: 2,
+    location: [
+      {
+        _id: ObjectId('6981c279ced59461ef628ca1'),
+        locationid: 2,
+        city: 'Mumbai',
+        state: 'Maharashtra',
+        country: 'India',
+        elevation: 14
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c285ced59461ef628ca8'),
+    weatherid: 103,
+    temperature: 26.8,
+    humidity: 85,
+    locationid: 3,
+    timeid: 3,
+    location: [
+      {
+        _id: ObjectId('6981c279ced59461ef628ca2'),
+        locationid: 3,
+        city: 'Delhi',
+        state: 'Delhi',
+        country: 'India',
+        elevation: 216
+      }
+    ]
+  }
+]
+environment> db.Location.aggregate([
+...   { $lookup: { from: "Weather", localField: "locationid", foreignField: "locationid", as: "weather" } },
+...   { $unionWith: { coll: "Weather" } }
+... ])
+[
+  {
+    _id: ObjectId('6981c279ced59461ef628ca0'),
+    locationid: 1,
+    city: 'Bangalore',
+    state: 'Karnataka',
+    country: 'India',
+    elevation: 920,
+    weather: [
+      {
+        _id: ObjectId('6981c285ced59461ef628ca6'),
+        weatherid: 101,
+        temperature: 24.5,
+        humidity: 60,
+        locationid: 1,
+        timeid: 1
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c279ced59461ef628ca1'),
+    locationid: 2,
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    country: 'India',
+    elevation: 14,
+    weather: [
+      {
+        _id: ObjectId('6981c285ced59461ef628ca7'),
+        weatherid: 102,
+        temperature: 32,
+        humidity: 70,
+        locationid: 2,
+        timeid: 2
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c279ced59461ef628ca2'),
+    locationid: 3,
+    city: 'Delhi',
+    state: 'Delhi',
+    country: 'India',
+    elevation: 216,
+    weather: [
+      {
+        _id: ObjectId('6981c285ced59461ef628ca8'),
+        weatherid: 103,
+        temperature: 26.8,
+        humidity: 85,
+        locationid: 3,
+        timeid: 3
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c285ced59461ef628ca6'),
+    weatherid: 101,
+    temperature: 24.5,
+    humidity: 60,
+    locationid: 1,
+    timeid: 1
+  },
+  {
+    _id: ObjectId('6981c285ced59461ef628ca7'),
+    weatherid: 102,
+    temperature: 32,
+    humidity: 70,
+    locationid: 2,
+    timeid: 2
+  },
+  {
+    _id: ObjectId('6981c285ced59461ef628ca8'),
+    weatherid: 103,
+    temperature: 26.8,
+    humidity: 85,
+    locationid: 3,
+    timeid: 3
+  }
+]
+environment> db.Location.aggregate([
+...   { $lookup: { from: "Time", pipeline: [], as: "time" } }
+... ])
+[
+  {
+    _id: ObjectId('6981c279ced59461ef628ca0'),
+    locationid: 1,
+    city: 'Bangalore',
+    state: 'Karnataka',
+    country: 'India',
+    elevation: 920,
+    time: [
+      {
+        _id: ObjectId('6981c280ced59461ef628ca3'),
+        timeid: 1,
+        date: ISODate('2026-01-10T00:00:00.000Z'),
+        year: 2026,
+        season: 'Winter'
+      },
+      {
+        _id: ObjectId('6981c280ced59461ef628ca4'),
+        timeid: 2,
+        date: ISODate('2026-03-15T00:00:00.000Z'),
+        year: 2026,
+        season: 'Summer'
+      },
+      {
+        _id: ObjectId('6981c280ced59461ef628ca5'),
+        timeid: 3,
+        date: ISODate('2026-07-20T00:00:00.000Z'),
+        year: 2026,
+        season: 'Monsoon'
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c279ced59461ef628ca1'),
+    locationid: 2,
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    country: 'India',
+    elevation: 14,
+    time: [
+      {
+        _id: ObjectId('6981c280ced59461ef628ca3'),
+        timeid: 1,
+        date: ISODate('2026-01-10T00:00:00.000Z'),
+        year: 2026,
+        season: 'Winter'
+      },
+      {
+        _id: ObjectId('6981c280ced59461ef628ca4'),
+        timeid: 2,
+        date: ISODate('2026-03-15T00:00:00.000Z'),
+        year: 2026,
+        season: 'Summer'
+      },
+      {
+        _id: ObjectId('6981c280ced59461ef628ca5'),
+        timeid: 3,
+        date: ISODate('2026-07-20T00:00:00.000Z'),
+        year: 2026,
+        season: 'Monsoon'
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c279ced59461ef628ca2'),
+    locationid: 3,
+    city: 'Delhi',
+    state: 'Delhi',
+    country: 'India',
+    elevation: 216,
+    time: [
+      {
+        _id: ObjectId('6981c280ced59461ef628ca3'),
+        timeid: 1,
+        date: ISODate('2026-01-10T00:00:00.000Z'),
+        year: 2026,
+        season: 'Winter'
+      },
+      {
+        _id: ObjectId('6981c280ced59461ef628ca4'),
+        timeid: 2,
+        date: ISODate('2026-03-15T00:00:00.000Z'),
+        year: 2026,
+        season: 'Summer'
+      },
+      {
+        _id: ObjectId('6981c280ced59461ef628ca5'),
+        timeid: 3,
+        date: ISODate('2026-07-20T00:00:00.000Z'),
+        year: 2026,
+        season: 'Monsoon'
+      }
+    ]
+  }
+]
+environment> db.AirQuality.aggregate([
+...   { $lookup: { from: "AirQuality", localField: "locationid", foreignField: "locationid", as: "compare" } }
+... ])
+[
+  {
+    _id: ObjectId('6981c28aced59461ef628ca9'),
+    airid: 401,
+    aqi: 75,
+    locationid: 1,
+    timeid: 1,
+    compare: [
+      {
+        _id: ObjectId('6981c28aced59461ef628ca9'),
+        airid: 401,
+        aqi: 75,
+        locationid: 1,
+        timeid: 1
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c28aced59461ef628caa'),
+    airid: 402,
+    aqi: 120,
+    locationid: 2,
+    timeid: 2,
+    compare: [
+      {
+        _id: ObjectId('6981c28aced59461ef628caa'),
+        airid: 402,
+        aqi: 120,
+        locationid: 2,
+        timeid: 2
+      }
+    ]
+  },
+  {
+    _id: ObjectId('6981c28aced59461ef628cab'),
+    airid: 403,
+    aqi: 95,
+    locationid: 3,
+    timeid: 3,
+    compare: [
+      {
+        _id: ObjectId('6981c28aced59461ef628cab'),
+        airid: 403,
+        aqi: 95,
+        locationid: 3,
+        timeid: 3
+      }
+    ]
+  }
+]
+environment> db.Weather.aggregate([
+...   { $group: { _id: "$locationid", total_records: { $sum: 1 } } }
+... ])
+...
+[
+  { _id: 1, total_records: 1 },
+  { _id: 2, total_records: 1 },
+  { _id: 3, total_records: 1 }
+]
+environment>
+
+
+
+
