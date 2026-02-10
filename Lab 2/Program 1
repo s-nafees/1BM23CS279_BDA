@@ -1,0 +1,218 @@
+bmscecse@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ cqlsh
+Connected to Test Cluster at 127.0.0.1:9042
+[cqlsh 6.1.0 | Cassandra 4.1.8 | CQL spec 3.4.6 | Native protocol v5]
+Use HELP for help.
+cqlsh> CREATE KEYSPACE Employee
+   ... WITH replication = {
+   ... 'class': 'SimpleStrategy',
+   ... 'replication_factor': 1
+   ... };
+AlreadyExists: Keyspace 'employee' already exists
+cqlsh> CREATE KEYSPACE Employee
+   ... WITH replication = {
+   ... 'class': 'SimpleStrategy',
+   ... 'replication_factor': 1
+   ... 
+   ... 
+   ... };
+AlreadyExists: Keyspace 'employee' already exists
+cqlsh> CREATE KEYSPACE Emp WITH replication = { 'class': 'SimpleStrategy', 'replication_factor': 1   };
+
+cqlsh> 
+cqlsh> describe keyspaces;
+
+emp       students  system_auth         system_schema  system_views         
+employee  system    system_distributed  system_traces  system_virtual_schema
+
+cqlsh> USE emp;
+cqlsh:emp> CREATE TABLE Employee_Info (
+       ... Emp_Id INT PRIMARY KEY,
+       ... Emp_Name TEXT,
+       ... Designation TEXT,
+       ... Date_of_Joining DATE,
+       ... Salary FLOAT,
+       ... Dept_Name TEXT
+       ... );
+cqlsh:emp> BEGIN BATCH
+       ... INSERT INTO Employee_Info (Emp_Id, Emp_Name, Designation, Date_of_Joining, Salary,
+       ... Dept_Name)
+       ... VALUES (120, 'Priyanka GH', 'Developer', '2024-05-06', 100000, 'Engineering');
+       ... 
+       ... INSERT INTO Employee_Info (Emp_Id, Emp_Name, Designation, Date_of_Joining, Salary,
+       ... Dept_Name)
+       ... VALUES (121, 'Shreya', 'Developer', '2024-05-06', 90000, 'Management');
+       ... INSERT INTO Employee_Info (Emp_Id, Emp_Name, Designation, Date_of_Joining, Salary,
+       ... Dept_Name)
+       ... VALUES (122, 'Sadhana', 'Engineer', '2024-05-07', 120000, 'Engineering');
+       ... APPLY BATCH;
+cqlsh:emp> SELECT * FROM Employee_Info;
+
+ emp_id | date_of_joining | dept_name   | designation | emp_name    | salary
+--------+-----------------+-------------+-------------+-------------+---------
+    120 |      2024-05-06 | Engineering |   Developer | Priyanka GH |   1e+05
+    122 |      2024-05-07 | Engineering |    Engineer |     Sadhana | 1.2e+05
+    121 |      2024-05-06 |  Management |   Developer |      Shreya |   90000
+
+(3 rows)
+cqlsh:emp> SELECT * FROM Employee_Info
+       ... ALLOW FILTERING;
+
+ emp_id | date_of_joining | dept_name   | designation | emp_name    | salary
+--------+-----------------+-------------+-------------+-------------+---------
+    120 |      2024-05-06 | Engineering |   Developer | Priyanka GH |   1e+05
+    122 |      2024-05-07 | Engineering |    Engineer |     Sadhana | 1.2e+05
+    121 |      2024-05-06 |  Management |   Developer |      Shreya |   90000
+
+(3 rows)
+cqlsh:emp> ALTER TABLE Employee_Info
+       ... ADD Projects SET<TEXT>;
+cqlsh:emp> DESCRIBE TABLE Employee_Info;
+
+CREATE TABLE emp.employee_info (
+    emp_id int PRIMARY KEY,
+    date_of_joining date,
+    dept_name text,
+    designation text,
+    emp_name text,
+    salary float,
+    projects set<text>
+) WITH additional_write_policy = '99p'
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND cdc = false
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '16', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND memtable = 'default'
+    AND crc_check_chance = 1.0
+    AND default_time_to_live = 0
+    AND extensions = {}
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair = 'BLOCKING'
+    AND speculative_retry = '99p';
+cqlsh:emp> DESCRIBE TABLE Employee_Info;
+
+CREATE TABLE emp.employee_info (
+    emp_id int PRIMARY KEY,
+    date_of_joining date,
+    dept_name text,
+    designation text,
+    emp_name text,
+    salary float,
+    projects set<text>
+) WITH additional_write_policy = '99p'
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND cdc = false
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '16', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND memtable = 'default'
+    AND crc_check_chance = 1.0
+    AND default_time_to_live = 0
+    AND extensions = {}
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair = 'BLOCKING'
+    AND speculative_retry = '99p';
+cqlsh:emp> DESCRIBE TABLE Employee_Info;
+
+CREATE TABLE emp.employee_info (
+    emp_id int PRIMARY KEY,
+    date_of_joining date,
+    dept_name text,
+    designation text,
+    emp_name text,
+    salary float,
+    projects set<text>
+) WITH additional_write_policy = '99p'
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND cdc = false
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '16', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND memtable = 'default'
+    AND crc_check_chance = 1.0
+    AND default_time_to_live = 0
+    AND extensions = {}
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair = 'BLOCKING'
+    AND speculative_retry = '99p';
+cqlsh:emp> 
+cqlsh:emp> DESCRIBE TABLE Employee_Info;
+
+CREATE TABLE emp.employee_info (
+    emp_id int PRIMARY KEY,
+    date_of_joining date,
+    dept_name text,
+    designation text,
+    emp_name text,
+    salary float,
+    projects set<text>
+) WITH additional_write_policy = '99p'
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND cdc = false
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '16', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND memtable = 'default'
+    AND crc_check_chance = 1.0
+    AND default_time_to_live = 0
+    AND extensions = {}
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair = 'BLOCKING'
+    AND speculative_retry = '99p';
+cqlsh:emp> UPDATE Employee_Info
+       ... SET Projects = {'Project A', 'Project B'}
+       ... WHERE Emp_Id = 120;
+cqlsh:emp> UPDATE Employee_Info
+       ... SET Projects = {'Project C'}
+       ... WHERE Emp_Id = 121;
+cqlsh:emp> UPDATE Employee_Info
+       ... SET Projects = {'Project A', 'Project D'}
+       ... WHERE Emp_Id = 122;
+cqlsh:emp> SELECT Emp_Id, Emp_Name, Projects FROM Employee_Info;
+
+ emp_id | emp_name    | projects
+--------+-------------+----------------------------
+    120 | Priyanka GH | {'Project A', 'Project B'}
+    122 |     Sadhana | {'Project A', 'Project D'}
+    121 |      Shreya |              {'Project C'}
+
+(3 rows)
+cqlsh:emp> UPDATE Employee_Info
+       ... USING TTL 15
+       ... SET Salary = 0
+       ... WHERE Emp_Id = 121;
+cqlsh:emp> SELECT * FROM Employee_Info;
+
+ emp_id | date_of_joining | dept_name   | designation | emp_name    | projects                   | salary
+--------+-----------------+-------------+-------------+-------------+----------------------------+---------
+    120 |      2024-05-06 | Engineering |   Developer | Priyanka GH | {'Project A', 'Project B'} |   1e+05
+    122 |      2024-05-07 | Engineering |    Engineer |     Sadhana | {'Project A', 'Project D'} | 1.2e+05
+    121 |      2024-05-06 |  Management |   Developer |      Shreya |              {'Project C'} |       0
+
+(3 rows)
+cqlsh:emp> SELECT * FROM Employee_Info;
+
+ emp_id | date_of_joining | dept_name   | designation | emp_name    | projects                   | salary
+--------+-----------------+-------------+-------------+-------------+----------------------------+---------
+    120 |      2024-05-06 | Engineering |   Developer | Priyanka GH | {'Project A', 'Project B'} |   1e+05
+    122 |      2024-05-07 | Engineering |    Engineer |     Sadhana | {'Project A', 'Project D'} | 1.2e+05
+    121 |      2024-05-06 |  Management |   Developer |      Shreya |              {'Project C'} |    null
+
+(3 rows)
+cqlsh:emp> 
