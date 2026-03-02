@@ -1,0 +1,112 @@
+cqlsh> CREATE KEYSPACE library_279
+   ... WITH replication = {
+   ...      'class': 'SimpleStrategy',
+   ...     'replication_factor': 1
+   ... };
+cqlsh> USE library_279;
+cqlsh:library_279> CREATE TABLE Library_Info (
+               ...     Stud_Id int,
+               ...     Book_Id int,
+               ...     Stud_Name text,
+               ...     Book_Name text,
+               ...     Date_Issue date,
+               ...     PRIMARY KEY (Stud_Id, Book_Id)
+               ... );
+cqlsh:library_279> CREATE TABLE Library_Counter (
+               ...     Stud_Id int,
+               ...     Book_Id int,
+               ...     Counter_Value counter,
+               ...     PRIMARY KEY (Stud_Id, Book_Id)
+               ... );
+cqlsh:library_279> BEGIN BATCH
+               ... 
+               ... INSERT INTO Library_Info (Stud_Id, Book_Id, Stud_Name, Book_Name, Date_Issue)
+               ... VALUES (101, 1, 'Rahul', 'DBMS', '2026-02-20');
+               ... 
+               ... INSERT INTO Library_Info (Stud_Id, Book_Id, Stud_Name, Book_Name, Date_Issue)
+               ... VALUES (112, 2, 'Ankit', 'BDA', '2026-02-21');
+
+               ... INSERT INTO Library_Info (Stud_Id, Book_Id, Stud_Name, Book_Name, Date_Issue)
+               ... VALUES (112, 3, 'Ankit', 'ML', '2026-02-22');
+               ... 
+               ... APPLY BATCH;
+
+
+cqlsh:library_279> SELECT * FROM Library_Info;
+
+ stud_id | book_id | book_name | date_issue | stud_name
+---------+---------+-----------+------------+-----------
+     112 |       2 |       BDA | 2026-02-21 |     Ankit
+     112 |       3 |        ML | 2026-02-22 |     Ankit
+     101 |       1 |      DBMS | 2026-02-20 |     Rahul
+
+(3 rows)
+cqlsh:library_279> SELECT * FROM Library_Counter;
+
+ stud_id | book_id | counter_value
+---------+---------+---------------
+     112 |       2 |             1
+
+(1 rows)
+cqlsh:library_279> UPDATE Library_Counter
+               ... SET Counter_Value = Counter_Value + 1
+               ... WHERE Stud_Id = 101 AND Book_Id = 1;
+cqlsh:library_279> SELECT Counter_Value
+               ... FROM Library_Counter
+               ... WHERE Stud_Id = 112 AND Book_Id = 2;
+
+ counter_value
+---------------
+             2
+
+(1 rows)
+
+cqlsh:library_279> COPY Library_Info TO '/home/bmscecse/library_info.csv' WITH HEADER = TRUE;
+Using 16 child processes
+
+Starting copy of library_279.library_info with columns [stud_id, book_id, book_name, date_issue, stud_name].
+Processed: 3 rows; Rate:      41 rows/s; Avg. rate:      41 rows/s
+3 rows exported to 1 files in 0.098 seconds.
+
+cqlsh:library_279> COPY Library_Counter TO '/home/bmscecse/library_counter.csv' WITH HEADER = TRUE;
+Using 16 child processes
+Starting copy of library_279.library_counter with columns [stud_id, book_id, counter_value].
+Processed: 2 rows; Rate:      37 rows/s; Avg. rate:      37 rows/s
+2 rows exported to 1 files in 0.077 seconds.
+
+
+
+cqlsh:library_279> COPY Library_Info (Stud_Id, Book_Id, Book_Name, Date_Issue, Stud_Name)
+               ... FROM '/home/bmscecse/library_info.csv'
+               ... WITH HEADER = TRUE;
+Using 16 child processes
+
+Starting copy of library_279.library_info with columns [stud_id, book_id, book_name, date_issue, stud_name].
+Processed: 3 rows; Rate:       6 rows/s; Avg. rate:       8 rows/s
+3 rows imported from 1 files in 0.359 seconds (0 skipped).
+cqlsh:library_279> COPY Library_Counter (Stud_Id, Book_Id, Counter_Value)
+               ... FROM '/home/bmscecse/library_counter.csv'
+               ... WITH HEADER = TRUE;
+Using 16 child processes
+
+Starting copy of library_279.library_counter with columns [stud_id, book_id, counter_value].
+Processed: 2 rows; Rate:       4 rows/s; Avg. rate:       6 rows/s
+2 rows imported from 1 files in 0.364 seconds (0 skipped).
+cqlsh:library_279> SELECT * FROM Library_Info;
+
+ stud_id | book_id | book_name | date_issue | stud_name
+---------+---------+-----------+------------+-----------
+     112 |       2 |       BDA | 2026-02-21 |     Ankit
+     112 |       3 |        ML | 2026-02-22 |     Ankit
+     101 |       1 |      DBMS | 2026-02-20 |     Rahul
+
+(3 rows)
+cqlsh:library_279> SELECT * FROM Library_Counter;
+
+ stud_id | book_id | counter_value
+---------+---------+---------------
+     112 |       2 |             4
+     101 |       1 |             2
+
+(2 rows)
+cqlsh:library_279> 
