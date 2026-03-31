@@ -1,0 +1,258 @@
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ nano TopN.java
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ nano TopNMapper.java
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ nano TopNMapper.java
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ nano TopNReducer.java
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ javac -classpath `hadoop classpath` -d . TopN.java TopNMapper.java TopNReducer.java
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ jar -cvf topn.jar *
+snap/firefox/7901/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/firefox/7901/.config/gtk-3.0/settings.ini : no such file or directory
+snap/firefox/7901/.config/gtk-3.0/gtk.css : no such file or directory
+snap/firefox/7967/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/firefox/7967/.config/gtk-3.0/settings.ini : no such file or directory
+snap/firefox/7967/.config/gtk-3.0/gtk.css : no such file or directory
+snap/firefox/current/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/firefox/current/.config/gtk-3.0/settings.ini : no such file or directory
+snap/firefox/current/.config/gtk-3.0/gtk.css : no such file or directory
+snap/firefox/common/.cache/gio-modules/libgiolibproxy.so : no such file or directory
+snap/firefox/common/.cache/gio-modules/libgiognomeproxy.so : no such file or directory
+snap/firefox/common/.cache/gio-modules/libgiognutls.so : no such file or directory
+snap/firefox/common/.cache/gio-modules/libdconfsettings.so : no such file or directory
+snap/firefox/common/.cache/gio-modules/libgioenvironmentproxy.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-inuktitut.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-thai.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-ibus.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-broadway.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-am-et.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-fcitx.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-viqr.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-waylandgtk.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-ti-er.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-cyrillic-translit.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-cedilla.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-ti-et.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-xim.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-ipa.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-multipress.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-wayland.so : no such file or directory
+snap/firefox/common/.mozilla/firefox/rbq7fbjf.default/lock : no such file or directory
+snap/snapd-desktop-integration/current/.themes : no such file or directory
+snap/snapd-desktop-integration/current/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/snapd-desktop-integration/current/.config/gtk-3.0/settings.ini : no such file or directory
+snap/snapd-desktop-integration/current/.config/gtk-3.0/gtk.css : no such file or directory
+snap/snapd-desktop-integration/current/.local/share/themes : no such file or directory
+snap/snapd-desktop-integration/common/.cache/gio-modules/libgiolibproxy.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/gio-modules/libgiognomeproxy.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/gio-modules/libgiognutls.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/gio-modules/libdconfsettings.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/gio-modules/libgioenvironmentproxy.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-inuktitut.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-thai.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-ibus.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-broadway.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-am-et.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-fcitx.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-viqr.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-waylandgtk.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-ti-er.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-cyrillic-translit.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-cedilla.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-ti-et.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-xim.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-ipa.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-multipress.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-wayland.so : no such file or directory
+snap/snapd-desktop-integration/343/.themes : no such file or directory
+snap/snapd-desktop-integration/343/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/snapd-desktop-integration/343/.config/gtk-3.0/settings.ini : no such file or directory
+snap/snapd-desktop-integration/343/.config/gtk-3.0/gtk.css : no such file or directory
+snap/snapd-desktop-integration/343/.local/share/themes : no such file or directory
+snap/snapd-desktop-integration/353/.themes : no such file or directory
+snap/snapd-desktop-integration/353/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/snapd-desktop-integration/353/.config/gtk-3.0/settings.ini : no such file or directory
+snap/snapd-desktop-integration/353/.config/gtk-3.0/gtk.css : no such file or directory
+snap/snapd-desktop-integration/353/.local/share/themes : no such file or directory
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ start-dfs.sh
+start-yarn.sh
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC]
+Starting resourcemanager
+Starting nodemanagers
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ nano input.txt
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ hdfs dfs -mkdir /input
+hdfs dfs -put input.txt /input
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ hadoop jar topn.jar TopN /input /output
+JAR does not exist or is not a normal file: /home/hadoop/topn.jar
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ jar -cvf topn.jar *
+snap/firefox/7901/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/firefox/7901/.config/gtk-3.0/settings.ini : no such file or directory
+snap/firefox/7901/.config/gtk-3.0/gtk.css : no such file or directory
+snap/firefox/7967/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/firefox/7967/.config/gtk-3.0/settings.ini : no such file or directory
+snap/firefox/7967/.config/gtk-3.0/gtk.css : no such file or directory
+snap/firefox/current/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/firefox/current/.config/gtk-3.0/settings.ini : no such file or directory
+snap/firefox/current/.config/gtk-3.0/gtk.css : no such file or directory
+snap/firefox/common/.cache/gio-modules/libgiolibproxy.so : no such file or directory
+snap/firefox/common/.cache/gio-modules/libgiognomeproxy.so : no such file or directory
+snap/firefox/common/.cache/gio-modules/libgiognutls.so : no such file or directory
+snap/firefox/common/.cache/gio-modules/libdconfsettings.so : no such file or directory
+snap/firefox/common/.cache/gio-modules/libgioenvironmentproxy.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-inuktitut.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-thai.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-ibus.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-broadway.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-am-et.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-fcitx.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-viqr.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-waylandgtk.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-ti-er.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-cyrillic-translit.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-cedilla.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-ti-et.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-xim.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-ipa.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-multipress.so : no such file or directory
+snap/firefox/common/.cache/immodules/im-wayland.so : no such file or directory
+snap/firefox/common/.mozilla/firefox/rbq7fbjf.default/lock : no such file or directory
+snap/snapd-desktop-integration/current/.themes : no such file or directory
+snap/snapd-desktop-integration/current/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/snapd-desktop-integration/current/.config/gtk-3.0/settings.ini : no such file or directory
+snap/snapd-desktop-integration/current/.config/gtk-3.0/gtk.css : no such file or directory
+snap/snapd-desktop-integration/current/.local/share/themes : no such file or directory
+snap/snapd-desktop-integration/common/.cache/gio-modules/libgiolibproxy.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/gio-modules/libgiognomeproxy.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/gio-modules/libgiognutls.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/gio-modules/libdconfsettings.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/gio-modules/libgioenvironmentproxy.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-inuktitut.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-thai.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-ibus.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-broadway.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-am-et.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-fcitx.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-viqr.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-waylandgtk.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-ti-er.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-cyrillic-translit.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-cedilla.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-ti-et.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-xim.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-ipa.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-multipress.so : no such file or directory
+snap/snapd-desktop-integration/common/.cache/immodules/im-wayland.so : no such file or directory
+snap/snapd-desktop-integration/343/.themes : no such file or directory
+snap/snapd-desktop-integration/343/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/snapd-desktop-integration/343/.config/gtk-3.0/settings.ini : no such file or directory
+snap/snapd-desktop-integration/343/.config/gtk-3.0/gtk.css : no such file or directory
+snap/snapd-desktop-integration/343/.local/share/themes : no such file or directory
+snap/snapd-desktop-integration/353/.themes : no such file or directory
+snap/snapd-desktop-integration/353/.config/gtk-2.0/gtkfilechooser.ini : no such file or directory
+snap/snapd-desktop-integration/353/.config/gtk-3.0/settings.ini : no such file or directory
+snap/snapd-desktop-integration/353/.config/gtk-3.0/gtk.css : no such file or directory
+snap/snapd-desktop-integration/353/.local/share/themes : no such file or directory
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ ls
+Desktop              hadoopdata  Templates          TopNReducer.java
+Documents            input.txt   TopN.class         Videos
+Downloads            Music       TopN.java          weather_project
+hadoop               Pictures    TopNMapper.class   wget-log
+hadoop-2.6.0.tar.gz  Public      TopNMapper.java    wordcount
+hadoop-3.3.6.tar.gz  snap        TopNReducer.class
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ jar -cvf topn.jar TopN*.class
+added manifest
+adding: TopN.class(in = 1376) (out= 764)(deflated 44%)
+adding: TopNMapper.class(in = 1854) (out= 822)(deflated 55%)
+adding: TopNReducer.class(in = 3455) (out= 1416)(deflated 59%)
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ ls
+Desktop              hadoopdata  Templates         TopNReducer.class
+Documents            input.txt   TopN.class        TopNReducer.java
+Downloads            Music       topn.jar          Videos
+hadoop               Pictures    TopN.java         weather_project
+hadoop-2.6.0.tar.gz  Public      TopNMapper.class  wget-log
+hadoop-3.3.6.tar.gz  snap        TopNMapper.java   wordcount
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ hadoop jar topn.jar TopN /input /output 
+2026-03-31 15:55:56,031 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2026-03-31 15:55:56,387 WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+2026-03-31 15:55:56,408 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoop/.staging/job_1774952523838_0001
+2026-03-31 15:55:56,591 INFO input.FileInputFormat: Total input files to process : 1
+2026-03-31 15:55:56,691 INFO mapreduce.JobSubmitter: number of splits:1
+2026-03-31 15:55:56,799 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1774952523838_0001
+2026-03-31 15:55:56,799 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2026-03-31 15:55:56,878 INFO conf.Configuration: resource-types.xml not found
+2026-03-31 15:55:56,879 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-03-31 15:55:56,999 INFO impl.YarnClientImpl: Submitted application application_1774952523838_0001
+2026-03-31 15:55:57,022 INFO mapreduce.Job: The url to track the job: http://bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:8088/proxy/application_1774952523838_0001/
+2026-03-31 15:55:57,023 INFO mapreduce.Job: Running job: job_1774952523838_0001
+2026-03-31 15:56:02,112 INFO mapreduce.Job: Job job_1774952523838_0001 running in uber mode : false
+2026-03-31 15:56:02,113 INFO mapreduce.Job:  map 0% reduce 0%
+2026-03-31 15:56:05,151 INFO mapreduce.Job:  map 100% reduce 0%
+2026-03-31 15:56:09,174 INFO mapreduce.Job:  map 100% reduce 100%
+2026-03-31 15:56:10,188 INFO mapreduce.Job: Job job_1774952523838_0001 completed successfully
+2026-03-31 15:56:10,239 INFO mapreduce.Job: Counters: 54
+	File System Counters
+		FILE: Number of bytes read=64
+		FILE: Number of bytes written=552225
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=151
+		HDFS: Number of bytes written=38
+		HDFS: Number of read operations=8
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=1
+		Launched reduce tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=1088
+		Total time spent by all reduces in occupied slots (ms)=1240
+		Total time spent by all map tasks (ms)=1088
+		Total time spent by all reduce tasks (ms)=1240
+		Total vcore-milliseconds taken by all map tasks=1088
+		Total vcore-milliseconds taken by all reduce tasks=1240
+		Total megabyte-milliseconds taken by all map tasks=1114112
+		Total megabyte-milliseconds taken by all reduce tasks=1269760
+	Map-Reduce Framework
+		Map input records=1
+		Map output records=9
+		Map output bytes=85
+		Map output materialized bytes=64
+		Input split bytes=102
+		Combine input records=9
+		Combine output records=5
+		Reduce input groups=5
+		Reduce shuffle bytes=64
+		Reduce input records=5
+		Reduce output records=5
+		Spilled Records=10
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=13
+		CPU time spent (ms)=680
+		Physical memory (bytes) snapshot=632422400
+		Virtual memory (bytes) snapshot=5629403136
+		Total committed heap usage (bytes)=1048576000
+		Peak Map Physical memory (bytes)=360861696
+		Peak Map Virtual memory (bytes)=2810638336
+		Peak Reduce Physical memory (bytes)=271560704
+		Peak Reduce Virtual memory (bytes)=2818764800
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=49
+	File Output Format Counters 
+		Bytes Written=38
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ hdfs dfs -cat /output/part-r-00000
+hello	3
+big	2
+data	2
+world	1
+hadoop	1
+hadoop@bmscecse-HP-Pro-Tower-400-G9-PCI-Desktop-PC:~$ 
