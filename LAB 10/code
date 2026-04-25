@@ -1,0 +1,90 @@
+bmscecse@bmscecse-HP-Elite-Tower-600-G9-Desktop-PC:~$ spark-shell
+26/04/21 16:17:28 WARN Utils: Your hostname, bmscecse-HP-Elite-Tower-600-G9-Desktop-PC resolves to a loopback address: 127.0.1.1; using 10.124.3.72 instead (on interface eno1)
+26/04/21 16:17:28 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+26/04/21 16:17:28 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+Spark context Web UI available at http://10.124.3.72:4040
+Spark context available as 'sc' (master = local[*], app id = local-1776768451184).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.0.3
+      /_/
+         
+Using Scala version 2.12.10 (OpenJDK 64-Bit Server VM, Java 1.8.0_482)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types.StringType
+
+val stopWords = Set("a","an","the","and","or","but","in","on","at","to","for",
+  "of","with","by","is","are","was","were","be","have","has","do","does","did",
+  "it","its","this","that","i","you","he","she","we","they","not","so","if",
+  "over","also","just","there","as","up","out","than","then","when","what","which")
+
+def lemmatize(w: String): String = w match {
+  case s if s.endsWith("ing") && s.length > 5 => s.dropRight(3)
+  case s if s.endsWith("tion")                 => s.dropRight(3)
+  case s if s.endsWith("ed")  && s.length > 4 => s.dropRight(2)
+  case s if s.endsWith("es")  && s.length > 3 => s.dropRight(1)
+  case s if s.endsWith("s")   && s.length > 3 => s.dropRight(1)
+  case s                                        => s
+}
+
+def clean(text: String): String = {
+  if (text == null || text.isEmpty) return ""
+  val lower   = text.toLowerCase
+  val noUrls  = lower.replaceAll("https?://\\S+", "")
+  val noPunct = noUrls.replaceAll("[^a-z0-9\\s]", "")
+  val normed  = noPunct.replaceAll("\\s+", " ").trim
+  normed.split(" ").filter(w => w.nonEmpty && !stopWords.contains(w)).map(lemmatize).mkString(" ")
+}
+
+val cleanUDF = udf((t: String) => clean(t))
+
+val stream = spark.readStream
+  .format("socket")
+  .option("host", "localhost")
+  .option("port", 9999)
+  .load()
+
+val cleaned = stream
+  .withColumn("cleaned", cleanUDF($"value"))
+  .select($"value".as("original"), $"cleaned")
+
+cleaned.writeStream
+  .outputMode("append")
+  .format("console")
+  .option("truncate", false)
+  .trigger(org.apache.spark.sql.streaming.Trigger.ProcessingTime("2 seconds"))
+  .start()
+  .awaitTermination()
+
+// Exiting paste mode, now interpreting.
+
+26/04/21 16:18:20 WARN TextSocketSourceProvider: The socket source should not be used for production applications! It does not support recovery.
+26/04/21 16:18:20 WARN StreamingQueryManager: Temporary checkpoint location created which is deleted normally when the query didn't fail: /tmp/temporary-aa0bea3b-0517-4341-a46c-aaedc118d895. If it's required to delete it under any circumstances, please set spark.sql.streaming.forceDeleteTempCheckpointLocation to true. Important to know deleting temp checkpoint folder is best effort.
+-------------------------------------------
+Batch: 0
+-------------------------------------------
++--------+-------+
+|original|cleaned|
++--------+-------+
++--------+-------+
+
+-------------------------------------------
+Batch: 1
+-------------------------------------------
++--------------------------------------------------+-------------------------+
+|original                                          |cleaned                  |
++--------------------------------------------------+-------------------------+
+|The cats are running quickly over the lazy dogs!!!|cat runn quickly lazy dog|
++--------------------------------------------------+-------------------------+
